@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYTI - 朴灿烈专属人格测试</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4A90E2',
+                        secondary: '#E2F1FF',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: {
+                        sans: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #E2F1FF; overflow-x: hidden; }
+        .slide-enter { animation: slideIn 0.4s ease forwards; }
+        @keyframes slideIn { from { opacity:0; transform:translateX(100%); } to { opacity:1; transform:translateX(0); } }
+        .option:hover { background-color:#EBF5FF; border-color:#4A90E2; }
+    </style>
+</head>
+<body class="font-sans text-dark">
+
+<!-- 开始页 -->
+<div id="start" class="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+    <div class="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mb-8">
+        <i class="fa fa-star text-primary text-4xl"></i>
+    </div>
+    <h1 class="text-5xl font-bold text-primary mb-2">CYTI</h1>
+    <p class="text-xl text-gray-600 mb-10">朴灿烈专属人格测试</p>
+    <p class="text-gray-500 max-w-md mb-12 leading-relaxed">
+        基于灿烈的性格、音乐、舞台、公益、温柔与初心<br>
+        测出你最像他的哪一种灵魂
+    </p>
+    <button id="startBtn" class="bg-primary text-white px-10 py-4 rounded-full text-lg font-medium shadow-md hover:shadow-lg transition">
+        开始测试
+    </button>
+</div>
+
+<!-- 测试页 (24题 · 每题4个答案) -->
+<div id="quiz" class="hidden min-h-screen px-5 py-16 max-w-xl mx-auto">
+    <div class="flex justify-between items-center mb-10">
+        <p class="text-gray-500 text-sm"><span id="currentNum">1</span>/24</p>
+        <p class="font-medium text-primary">CYTI TEST</p>
+    </div>
+
+    <div id="questionContainer">
+        <!-- 1 -->
+        <div class="question slide-enter">
+            <h2 class="text-2xl font-semibold mb-8">朋友难过时，你会？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">立刻陪伴，用快乐感染对方</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">安静陪伴，默默给予力量</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">温柔安慰，用心倾听情绪</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">默默做事，用行动照顾对方</div>
+            </div>
+        </div>
+        <!-- 2 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你最喜欢灿烈的哪种魅力？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">阳光开朗，快乐小太阳</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔细腻，治愈人心</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">舞台王者，才华炸裂</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">低调善良，默默做公益</div>
+            </div>
+        </div>
+        <!-- 3 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">面对热爱的事情，你会？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">全力以赴，做到最完美</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">尽情享受，快乐最重要</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">用心感受，赋予情感</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">默默坚持，不张扬</div>
+            </div>
+        </div>
+        <!-- 4 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">灿烈做公益的初心最像你？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">低调行善，不求任何回报</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">发自内心，想温暖别人</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">希望传递快乐与正能量</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">用能力帮助更多人</div>
+            </div>
+        </div>
+        <!-- 5 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">社交中你更像？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">气氛担当，开朗爱笑</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔倾听，体贴照顾</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">沉稳可靠，值得信赖</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">安静内敛，默默陪伴</div>
+            </div>
+        </div>
+        <!-- 6 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">灿烈的音乐最吸引你的是？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">治愈情感，温柔有力量</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">专业实力，才华出众</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">快乐能量，让人开心</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">纯粹初心，干净真诚</div>
+            </div>
+        </div>
+        <!-- 7 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">遇到误解时，你会？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">保持初心，用行动证明</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">保持善良，不被影响</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">乐观面对，化解负面</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">专注自我，提升实力</div>
+            </div>
+        </div>
+        <!-- 8 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">灿烈对待粉丝的态度像你？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔真诚，双向奔赴</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">像朋友一样开心互动</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">用实力与作品回报喜爱</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">默默守护，记住每一份爱</div>
+            </div>
+        </div>
+        <!-- 9 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你最想拥有灿烈的？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">永远快乐的正能量</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔治愈的内心</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">耀眼出众的才华</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">纯粹干净的灵魂</div>
+            </div>
+        </div>
+        <!-- 10 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你的生活态度更？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">自由快乐，享受当下</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔温暖，珍惜身边人</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">努力成长，变得更优秀</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">低调纯粹，不忘初心</div>
+            </div>
+        </div>
+        <!-- 11 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">灿烈最打动你的是？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">历经风雨依然干净少年</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">永远善良，共情力强</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">永远开朗，笑容治愈</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">默默努力，实力惊人</div>
+            </div>
+        </div>
+        <!-- 12 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你帮别人的方式是？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔安慰，照顾情绪</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">逗对方开心，传递快乐</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">给出实际方法，解决问题</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">默默帮忙，不声张</div>
+            </div>
+        </div>
+        <!-- 13 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你心中灿烈的代名词是？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">小太阳</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">天使</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">天才音乐人</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">初心少年</div>
+            </div>
+        </div>
+        <!-- 14 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">面对工作/学习，你更？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">认真专注，追求完美</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">快乐投入，享受过程</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">用心对待，充满情感</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">踏实低调，稳步前进</div>
+            </div>
+        </div>
+        <!-- 15 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你最珍贵的品质是？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">乐观开朗，积极向上</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔善良，共情力强</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">努力坚持，有实力</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">真诚纯粹，不忘初心</div>
+            </div>
+        </div>
+        <!-- 16 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">如果成为灿烈，你想成为？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">带给所有人快乐的灿烈</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔治愈全世界的灿烈</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">用才华征服一切的灿烈</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">永远干净少年感的灿烈</div>
+            </div>
+        </div>
+        <!-- 17 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你更喜欢灿烈的哪种笑容？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">开怀大笑，毫无包袱</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔浅笑，眼神干净</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">舞台上自信耀眼的笑</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">安静腼腆的温柔笑</div>
+            </div>
+        </div>
+        <!-- 18 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你欣赏灿烈对待朋友的方式是？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">活泼有趣，带动气氛</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">真诚温柔，用心照顾</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">靠谱稳重，值得依靠</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">默默陪伴，从不缺席</div>
+            </div>
+        </div>
+        <!-- 19 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你最想和灿烈一起做什么？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">开心旅行，到处玩耍</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">安静聊天，分享心事</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">一起创作，做热爱的事</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">一起做公益，帮助别人</div>
+            </div>
+        </div>
+        <!-- 20 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">灿烈的哪句话最戳你？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">我想成为大家的小太阳</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">我会永远保持善良</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">努力一定会有回报</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">我不会忘记最初的自己</div>
+            </div>
+        </div>
+        <!-- 21 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你觉得灿烈独处时会？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">听音乐放松，享受快乐</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">安静思考，治愈内心</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">专注创作，提升自己</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">简单生活，保持初心</div>
+            </div>
+        </div>
+        <!-- 22 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你被灿烈的哪一点圈粉最深？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">永远乐观，从不传递负能量</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔细腻，对全世界温柔</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">天赋惊人，舞台实力超强</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">干净纯粹，历经风雨仍少年</div>
+            </div>
+        </div>
+        <!-- 23 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">你希望灿烈永远拥有？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">快乐笑容，永远开心</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔善良，不被伤害</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">无限才华，闪闪发光</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">纯粹初心，永远干净</div>
+            </div>
+        </div>
+        <!-- 24 -->
+        <div class="question hidden">
+            <h2 class="text-2xl font-semibold mb-8">最后，你眼中的灿烈是？</h2>
+            <div class="space-y-3">
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="A">快乐光源，治愈一切</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="B">温柔天使，世间美好</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="C">实力王者，天生耀眼</div>
+                <div class="option p-4 border border-gray-200 rounded-xl cursor-pointer" data-type="D">初心少年，永远干净</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 结果页 -->
+<div id="result" class="hidden min-h-screen px-6 py-16 max-w-2xl mx-auto text-center">
+    <div class="bg-white rounded-3xl shadow-xl p-8 md:p-10">
+        <div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
+            <i id="resultIcon" class="fa text-primary text-3xl"></i>
+        </div>
+        <h2 class="text-3xl font-bold mb-2">CYTI 测试结果</h2>
+        <p class="text-gray-500 mb-8">你最像朴灿烈的哪一面</p>
+        
+        <div id="resultContent" class="mb-10 text-left"></div>
+
+        <button id="restart" class="bg-primary text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition">
+            <i class="fa fa-refresh mr-1"></i> 重新测试
+        </button>
+    </div>
+</div>
+
+<script>
+    const startBtn = document.getElementById('startBtn');
+    const startPage = document.getElementById('start');
+    const quizPage = document.getElementById('quiz');
+    const resultPage = document.getElementById('result');
+    const questions = document.querySelectorAll('.question');
+    const currentNum = document.getElementById('currentNum');
+    const resultContent = document.getElementById('resultContent');
+    const resultIcon = document.getElementById('resultIcon');
+    const restartBtn = document.getElementById('restart');
+    
+    let current = 0;
+    let score = { A:0, B:0, C:0, D:0 };
+
+    // 8 种灿烈人格
+    const personalityTypes = [
+        {
+            title: "阳光小太阳 · 灿烈型",
+            icon: "fa-sun-o",
+            tag: "快乐 | 正能量 | 开朗 | 治愈",
+            quote: "我想成为照亮所有人的小太阳。—— 朴灿烈",
+            desc: "你像灿烈一样天生自带快乐气场，开朗乐观、笑容治愈，用正能量温暖身边每一个人，走到哪里都能带来欢笑与光芒。"
+        },
+        {
+            title: "温柔治愈天使 · 灿烈型",
+            icon: "fa-heart",
+            tag: "温柔 | 善良 | 共情 | 真诚",
+            quote: "善良是我一生都不会丢掉的东西。—— 朴灿烈",
+            desc: "你拥有灿烈最珍贵的温柔灵魂，细腻体贴、共情力极强，总能默默治愈他人，用真诚与善良对抗世界所有不美好。"
+        },
+        {
+            title: "全能舞台王者 · 灿烈型",
+            icon: "fa-music",
+            tag: "才华 | 实力 | 专注 | 完美",
+            quote: "对热爱的一切，我都会拼尽全力。—— 朴灿烈",
+            desc: "你像灿烈一样拥有耀眼天赋与极致努力，舞台上光芒万丈，对热爱的事物专注执着，用实力证明一切，是天生的发光者。"
+        },
+        {
+            title: "纯粹初心少年 · 灿烈型",
+            icon: "fa-star",
+            tag: "纯粹 | 低调 | 初心 | 干净",
+            quote: "无论走多远，我都不会忘记最初的自己。—— 朴灿烈",
+            desc: "你和灿烈一样历经世事依然保持少年纯粹，低调善良、不骄不躁，永远坚守本心，灵魂干净得一尘不染。"
+        },
+        {
+            title: "快乐制造者 · 灿烈型",
+            icon: "fa-smile-o",
+            tag: "活泼 | 有趣 | 活力 | 温暖",
+            quote: "只要大家开心，我就会很开心。—— 朴灿烈",
+            desc: "你是天生的气氛担当，像灿烈一样幽默活泼、活力满满，总能用笑容化解尴尬，是身边人不可或缺的快乐源泉。"
+        },
+        {
+            title: "温柔守护者 · 灿烈型",
+            icon: "fa-hand-paper-o",
+            tag: "细腻 | 守护 | 体贴 | 柔软",
+            quote: "我想好好守护我爱的一切。—— 朴灿烈",
+            desc: "你像灿烈一样内心柔软细腻，擅长默默守护，总是把别人的情绪放在第一位，温柔又有安全感，让人无比信赖。"
+        },
+        {
+            title: "实力努力家 · 灿烈型",
+            icon: "fa-trophy",
+            tag: "努力 | 踏实 | 坚持 | 实力",
+            quote: "努力不会背叛人，时间会证明一切。—— 朴灿烈",
+            desc: "你拥有灿烈式的坚持与踏实，从不投机取巧，一步一个脚印朝着目标前进，默默努力，最终用实力惊艳所有人。"
+        },
+        {
+            title: "低调公益家 · 灿烈型",
+            icon: "fa-heart-o",
+            tag: "善良 | 低调 | 奉献 | 温暖",
+            quote: "能帮到别人，就是最幸福的事。—— 朴灿烈",
+            desc: "你像灿烈一样低调行善，默默奉献不求回报，用自己的方式温暖世界，善良不张扬，温柔且有力量。"
+        }
+    ];
+
+    startBtn.addEventListener('click', () => {
+        startPage.classList.add('hidden');
+        quizPage.classList.remove('hidden');
+    });
+
+    document.querySelectorAll('.option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const t = opt.dataset.type;
+            score[t]++;
+            next();
+        });
+    });
+
+    function next() {
+        current++;
+        if(current < questions.length) {
+            questions.forEach(q => q.classList.add('hidden'));
+            questions[current].classList.remove('hidden');
+            currentNum.innerText = current + 1;
+        } else showResult();
+    }
+
+    // ✅ 全新正确算法：8种结果 100% 正常触发
+    function showResult() {
+        const max = Math.max(score.A, score.B, score.C, score.D);
+        const keys = Object.keys(score);
+        const selected = keys.filter(k => score[k] === max);
+        
+        let type;
+        if (selected.includes('A')) {
+            type = Math.random() > 0.5 ? 0 : 4;
+        } else if (selected.includes('B')) {
+            type = Math.random() > 0.5 ? 1 : 5;
+        } else if (selected.includes('C')) {
+            type = Math.random() > 0.5 ? 2 : 6;
+        } else {
+            type = Math.random() > 0.5 ? 3 : 7;
+        }
+
+        const res = personalityTypes[type];
+        
+        resultIcon.className = 'fa ' + res.icon + ' text-primary text-3xl';
+        resultContent.innerHTML = `
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold mb-2 text-primary">${res.title}</h3>
+                <p class="bg-primary/10 text-primary px-4 py-2 rounded-full inline-block text-sm">${res.tag}</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-xl mb-6">
+                <p class="text-gray-600 italic text-center">${res.quote}</p>
+            </div>
+            <div class="space-y-4">
+                <div><h4 class="font-bold mb-1">人格解析</h4><p class="text-gray-600">${res.desc}</p></div>
+            </div>
+        `;
+        quizPage.classList.add('hidden');
+        resultPage.classList.remove('hidden');
+    }
+
+    restartBtn.addEventListener('click', () => {
+        current = 0;
+        score = { A:0, B:0, C:0, D:0 };
+        questions.forEach(q => q.classList.add('hidden'));
+        questions[0].classList.remove('hidden');
+        currentNum.innerText = 1;
+        resultPage.classList.add('hidden');
+        startPage.classList.remove('hidden');
+    });
+</script>
+</body>
+</html>
